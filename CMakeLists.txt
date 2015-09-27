@@ -5,6 +5,8 @@ project (Nyx)
 set (Nyx_VERSION_MAJOR 0)
 set (Nyx_VERSION_MINOR 1)
 
+set(CMAKE_CXX_FLAGS "-std=c++11")
+
 ################################################################################
 # GTest
 # See: http://code.google.com/p/googletest/

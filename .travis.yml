@@ -12,5 +12,7 @@ before_script:
   - cd build
   - cmake ..
 
-script: make
+script:
+  - make
+  - ./nyx_testrunner
 
