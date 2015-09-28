@@ -16,12 +16,20 @@ if (CMAKE_USE_PTHREADS_INIT)  # The pthreads library is available and allowed.
   else()
 	    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGTEST_HAS_PTHREAD=0")
     endif()
-    set(GTEST_DIR "testing/gtest")
+    set(GTEST_DIR "third_party/gtest")
     set(GTEST_INCLUDE_DIRECTORIES ${GTEST_DIR}/include ${GTEST_DIR}
 	    ${GTEST_DIR}/src)
     include_directories(${GTEST_INCLUDE_DIRECTORIES})
     add_library(gtest ${GTEST_DIR}/src/gtest-all.cc ${GTEST_DIR}/src/gtest_main.cc)
     enable_testing(true)
+
+################################################################################
+# Boost 
+# See: http://www.boost.org/
+################################################################################
+set(Boost_USE_STATIC_LIBS        ON) # only find static libs
+find_package(Boost 1.57.0 REQUIRED COMPONENTS filesystem system)
+include_directories(${Boost_INCLUDE_DIRS})
 
 # find all compilable files
 file(GLOB_RECURSE Nyx_ALL_SRC
@@ -40,7 +48,7 @@ foreach(test ${Nyx_TESTS_SRC})
 endforeach()
 
 include_directories("src")
-include_directories(".")
+include_directories("third_party")
 
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")

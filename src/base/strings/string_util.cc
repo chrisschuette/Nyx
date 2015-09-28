@@ -26,7 +26,7 @@ std::string JoinStringT(const std::vector<std::string>& parts,
   return result;
 }
 
-}  //namespace
+}  // namespace
 
 std::string JoinString(const std::vector<std::string>& parts, char separator) {
   return JoinStringT(parts, separator);
