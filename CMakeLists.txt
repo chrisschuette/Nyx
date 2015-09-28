@@ -5,7 +5,7 @@ project (Nyx)
 set (Nyx_VERSION_MAJOR 0)
 set (Nyx_VERSION_MINOR 1)
 
-set(CMAKE_CXX_FLAGS "-std=c++0x")
+set(CMAKE_CXX_FLAGS "-std=c++11")
 
 ################################################################################
 # GTest
@@ -28,7 +28,7 @@ if (CMAKE_USE_PTHREADS_INIT)  # The pthreads library is available and allowed.
 # See: http://www.boost.org/
 ################################################################################
 set(Boost_USE_STATIC_LIBS        ON) # only find static libs
-find_package(Boost 1.46.0 REQUIRED COMPONENTS filesystem system)
+find_package(Boost 1.55.0 REQUIRED COMPONENTS filesystem system)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # find all compilable files
