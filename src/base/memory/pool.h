@@ -18,7 +18,7 @@ class Pool {
   Pool(size_t max_items) : max_items_(max_items), free_items_(max_items_) {
     // TODO(cschuet): Ensure |max_items_| > 0.
     items_ = new T[max_items_];
-   for(int i = 0; i < max_items_; i++)
+    for(int i = 0; i < max_items_; i++)
       free_items_.Push(&items_[i]);
   } 
 
