@@ -14,16 +14,20 @@
 
 namespace resources {
 
+// A BundleId identifies a specific bundle.
 using BundleId = std::string;
+
+// An AssetId identifies a specific asset within a given bundle. AssetIds are
+// expected to be unique across all bundles.
 using AssetId = std::string;
 
-// Bundle defines an read-only interface for containers of game assets.
+// Bundle defines a read-only interface for containers of game assets.
 class Bundle {
  public:
   Bundle(const BundleId& bundle_id);
   virtual ~Bundle();
 
-  // Returns true if the bundle 
+  // Returns true if the bundle contains an asset with id |assetId|. 
   virtual bool Contains(const AssetId& assetId) const = 0;
 
   // Reads the data for |assetId| into |contents| and returns true on success.
