@@ -37,7 +37,8 @@ void DemangleSymbols(std::string* text) {
 
     // Try to demangle the mangled symbol candidate.
     int status = 0;
-    std::string demangled_symbol =
+
+    char* demangled_symbol =
         abi::__cxa_demangle(mangled_symbol.c_str(), NULL, 0, &status);
     if (status == 0) {  // Demangling is successful.
       // Remove the mangled symbol.
@@ -45,11 +46,12 @@ void DemangleSymbols(std::string* text) {
       // Insert the demangled symbol.
       text->insert(mangled_start, demangled_symbol);
       // Next time, we'll start right after the demangled symbol we inserted.
-      search_from = mangled_start + demangled_symbol.size();
+      search_from = mangled_start + strlen(demangled_symbol);
     } else {
       // Failed to demangle.  Retry after the "_Z" we just found.
       search_from = mangled_start + 2;
     }
+    free(demangled_symbol);
   }
 }
 
@@ -71,6 +73,7 @@ void StackTrace::OutputToStream(std::ostream* os) const {
     DemangleSymbols(&backtrace_symbol);
     *os << backtrace_symbol << std::endl;
   }
+  free(strings);
 }
 
 }  // namespace base
