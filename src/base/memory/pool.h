@@ -16,11 +16,9 @@ template <typename T>
 class Pool {
  public:
   Pool(size_t max_items) : max_items_(max_items), free_items_(max_items_) {
-    if (max_items_ > 0)
-      items_ = new T[max_items_];
-    else
-      items_ = nullptr;
-    for(int i = 0; i < max_items_; i++)
+    // TODO(cschuet): Ensure |max_items_| > 0.
+    items_ = new T[max_items_];
+   for(int i = 0; i < max_items_; i++)
       free_items_.Push(&items_[i]);
   } 
 

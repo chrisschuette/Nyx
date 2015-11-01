@@ -15,10 +15,8 @@ template <class T>
 class Stack {
  public:
   Stack(size_t max_items) : max_items_(max_items), top_(0) {
-    if (max_items_ > 0)
-      data_ = new T[max_items_];
-    else
-      data_ = nullptr;
+    // TODO(cschuet): Ensure |max_items_| > 0.
+    data_ = new T[max_items_];
   }
 
   ~Stack() {
