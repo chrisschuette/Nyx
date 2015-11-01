@@ -4,6 +4,7 @@
 
 #include "base/debug/stack_trace.h"
 
+#include <cstring>
 #include <cxxabi.h>
 #include <execinfo.h>
 
