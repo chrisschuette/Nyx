@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 
+#include "base/logging.h"
 #include "base/macros.h"
 #include "base/memory/stack.h"
 
@@ -16,7 +17,7 @@ template <typename T>
 class Pool {
  public:
   Pool(size_t max_items) : max_items_(max_items), free_items_(max_items_) {
-    // TODO(cschuet): Ensure |max_items_| > 0.
+    DCHECK(max_items_ > 0) << "Can't create empty pool.";
     items_ = new T[max_items_];
     for(int i = 0; i < max_items_; i++)
       free_items_.Push(&items_[i]);
@@ -43,8 +44,7 @@ class Pool {
   }
 
   void Free(T* item) {
-    // TODO(cschuet): Ensure that |item| points to a memory segment that belongs
-    // to this pool.
+    DCHECK(item >= items_ && item < items_ + max_items_);
     item->~T();
     free_items_.Push(item); 
   }

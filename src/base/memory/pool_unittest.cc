@@ -4,6 +4,7 @@
 
 #include <string>
 
+#include "base/logging.h"
 #include "base/memory/pool.h"
 #include "gtest/include/gtest/gtest.h"
 

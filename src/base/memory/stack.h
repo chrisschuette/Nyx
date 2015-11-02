@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 
+#include "base/logging.h"
 #include "base/macros.h"
 
 namespace base {
@@ -15,7 +16,7 @@ template <class T>
 class Stack {
  public:
   Stack(size_t max_items) : max_items_(max_items), top_(0) {
-    // TODO(cschuet): Ensure |max_items_| > 0.
+    DCHECK(max_items_ > 0);
     data_ = new T[max_items_];
   }
 
@@ -34,7 +35,7 @@ class Stack {
 
   bool Push(T item) {
     if (top_ >= max_items_) {
-      // TODO(cschuet): Handle error.
+      LOG(ERROR) << "Push() failed: stack already full.";
       return false;
     }
 
@@ -44,7 +45,7 @@ class Stack {
 
   bool Pop() {
     if (top_ == 0) {
-      // TODO(cschuet): Handle error.
+      LOG(ERROR) << "Pop() failed: stack already empty.";
       return false;
     }
 
@@ -58,7 +59,7 @@ class Stack {
 
   T* Top() {
     if (top_ == 0) {
-      // TODO(cschuet): Handle error.
+      LOG(ERROR) << "Top() failed: stack already empty.";
       return nullptr;
     }
 
@@ -67,7 +68,7 @@ class Stack {
 
   const T* Top() const {
     if (top_ == 0) {
-      // TODO(cschuet): Handle error.
+      LOG(ERROR) << "Top() failed: stack already empty.";
       return nullptr;
     }
 

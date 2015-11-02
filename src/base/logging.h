@@ -11,6 +11,15 @@
 
 namespace logging {
 
+#if defined(NDEBUG) && !defined(DCHECK_ALWAYS_ON)
+#define DCHECK_IS_ON() 0
+#else
+#define DCHECK_IS_ON() 1
+#endif
+
+#define DCHECK(condition)                                                \
+  LAZY_STREAM(LOG_STREAM(FATAL), DCHECK_IS_ON() ? !(condition) : false) \
+      << "Check failed: " #condition ". "
 
 typedef int LogSeverity;
 
